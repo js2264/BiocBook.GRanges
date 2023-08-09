@@ -5,6 +5,8 @@ book:
     - pages/join-is-an-overlap.qmd
     - pages/compute-overlaps.qmd
     - pages/promoter-marks.qmd
+    - pages/bootstrap-overlap.qmd
+    - pages/snp-position-in-peaks.qmd
   cover-image: inst/assets/cover.png
   favicon: inst/assets/favicon.png
   sidebar: 
