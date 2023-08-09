@@ -17,12 +17,15 @@ intro <- glue::glue(
     "**BioC version:** <b style='color:red;'>{BiocManager::version()}</b><br/>\n", 
     "**License:** {license}<br/>"
 )
-intro
 ```
 
-This is the landing page of the `BiocBook` entitled *...*.  
+`r intro`
 
-This book introduces the reader to *...*.  
+This is the landing page of the `BiocBook` entitled *Tidy GenomicRanges in R*. This 
+book compiles material put together by Michael Love. 
+
+These examples focus on the packages *dplyr*, *plyranges*, *nullranges*, 
+*excluderanges*, as well as  *tidy transcriptomics* packages such as  *tidybulk* and *tidySummarizedExperiment*.
 
 # Docker image {-}
 

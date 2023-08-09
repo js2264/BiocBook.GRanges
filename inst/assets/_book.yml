@@ -1,7 +1,10 @@
 book:
-  title: "BiocBook.GRanges"
+  title: "Tidy GenomicRanges (from Michael Love)"
   chapters:
     - index.qmd
+    - pages/join-is-an-overlap.qmd
+    - pages/compute-overlaps.qmd
+    - pages/promoter-marks.qmd
   cover-image: inst/assets/cover.png
   favicon: inst/assets/favicon.png
   sidebar: 

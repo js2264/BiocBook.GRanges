@@ -1,20 +1,34 @@
 Package: BiocBook.GRanges
-Title: What the Package Does (One Line, Title Case)
-Description: What the package does (one paragraph).
+Title: Tidy GenomicRanges (from Michael Love)
+Description:
+    Basic examples of computing operations on genomic ranges using the
+    tidy data philosophy.
 Version: 0.99.0
 Date: `r date()`
 Authors@R: 
+    c(person(
+        "Michael", "Love",
+        role = c("aut")
+    ),
     person(
-        "First", "Last", , "first.last@example.com", 
-        role = c("aut", "cre"),
-        comment = c(ORCID = "YOUR-ORCID-ID")
-    )
+        "Jacques", "Serizay",
+        role = c("com", "cre")
+    ))
 URL: https://github.com/js2264/BiocBook.GRanges
 BugReports: https://github.com/js2264/BiocBook.GRanges
 Depends:
     R (>= 4.3), 
     BiocBook
 Imports:
+    dplyr, 
+    tidyr, 
+    randomNames, 
+    plyranges, 
+    ensembldb, 
+    TxDb.Hsapiens.UCSC.hg19.knownGene, 
+    org.Hs.eg.db, 
+    AnnotationHub, 
+    tibble
 Suggests:
     glue,
     rebook,
