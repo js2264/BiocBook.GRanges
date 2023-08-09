@@ -11,7 +11,7 @@ Authors@R:
         role = c("aut")
     ),
     person(
-        "Jacques", "Serizay",
+        "Jacques", "Serizay", , "jacquesserizay@gmail.com", 
         role = c("com", "cre")
     ))
 URL: https://github.com/js2264/BiocBook.GRanges
