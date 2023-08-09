@@ -28,7 +28,7 @@ This book introduces the reader to *...*.
 
 A `Docker` image built from this repository is available here: 
 
-👉 [ghcr.io/<github_user>/<package_name>](https://ghcr.io/<github_user>/<package_name>) 🐳
+👉 [ghcr.io/js2264/biocbook.granges](https://ghcr.io/js2264/biocbook.granges) 🐳
 
 ::: {.callout-tip icon='true'}
 ## Get started now 🎉
@@ -38,7 +38,7 @@ using this command in a terminal:
 
 ```{sh "docker", filename="bash"}
 #| eval: false
-docker run -it ghcr.io/<github_user>/<package_name>:devel R
+docker run -it ghcr.io/js2264/biocbook.granges:devel R
 ```
 
 :::
@@ -53,7 +53,7 @@ docker run \
     --volume <local_folder>:<destination_folder> \
     -e PASSWORD=OHCA \
     -p 8787:8787 \
-    ghcr.io/<github_user>/<package_name>:devel
+    ghcr.io/js2264/biocbook.granges:devel
 ```
 
 The initiated RStudio Server instance will be available at 
