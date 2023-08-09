@@ -15,6 +15,8 @@ book:
             url:  https://github.com/js2264/BiocBook.GRanges/
           - text: Browse version `devel`
             url:  https://js2264.github.io/BiocBook.GRanges/devel/
+          - text: Browse version `3.17`
+            url:  https://js2264.github.io/BiocBook.GRanges/3.17/
     style: "docked"
     background: "light"
     collapse-level: 5
