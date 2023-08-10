@@ -3,7 +3,7 @@
 ::: {.callout-note icon='true'}
 ## Objectives
 
-- determine if one set of peaks are overlapping another set
+- Determine if one set of peaks are overlapping another set
 of peaks more or less than expected when comparing to sets of *null*
 features
 
@@ -55,7 +55,8 @@ they are available for hg19, which is the genome used with the peak
 sets.
 
 ```{r}
-data("exclude", "BiocBook.GRanges")
+library(BiocBook.GRanges)
+data("exclude", package ="BiocBook.GRanges")
 exclude
 ```
 

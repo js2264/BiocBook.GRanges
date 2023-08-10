@@ -1,0 +1,310 @@
+# Many genomic models
+
+::: {.callout-note icon='true'}
+## Objectives
+
+- Learn how to run many models (think many linear regressions or
+many machine learning models) in a tidy framework, by "nesting" the
+genomic dataset and storing the fitted models as rows of a new column
+in the nested table
+
+:::
+
+In the previous chapter, we looked at some basic filtering and
+plotting operations, with perhaps the most interesting operation being
+a grouped centering of the gene expression.  
+
+Here we will explore a
+special case of tidy-style operations on a genomic dataset, in
+particular a *SummarizedExperiment*, where we want to run multiple,
+similar models across groups of features (or likewise, the same could
+be done to rows).
+
+For some other references to these types of operations, you can check
+out:
+
+* [The "many models" chapter](https://r4ds.had.co.nz/many-models.html) 
+  of R for Data Science by @Wickham2017, which introduced the basics
+  of how to run many models in a tidy framework
+* The [nest](https://tidyr.tidyverse.org/articles/nest.html)
+  documentation in *tidyr*
+* The [tidymodels](https://www.tidymodels.org/) package
+
+Given the size of genomic data, and the way in which
+*tidySummarizedExperiment* abstracts the link between data (`assay`)
+and metadata (`rowData` and `colData`), we will consider in this
+chapter how the speed of the operations may be impacted by our
+choices in setting up the code. In the end, you may find that a more
+standard way of running the analyses (e.g. using base R/Bioc) is more
+efficient, depending on the cost incurred by the nesting operation,
+which we will describe shortly.
+
+We will work with a Bioconductor experiment package *fission* which
+contains a dataset created by @Leong2014 
+[PMC4050258](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4050258/):
+
+> Here we integrate high-throughput RNA sequencing and label-free
+> quantitative protein mass spectrometry to investigate global changes
+> in transcript and protein levels in the fission yeast stress
+> response.
+
+The experiment considers fission yeast of two strains,
+wild-type (WT) and atf21$\Delta$, but here we will not focus on these
+two strains but just lump the data together, to increase our sample
+size for the point of building the models.
+
+```{r message=FALSE}
+library(fission)
+data(fission)
+se <- fission
+colData(se)
+```
+
+We again use *tidybulk* to filter to abundant genes and scale counts
+for library size:
+
+```{r message=FALSE}
+library(tidybulk)
+se <- se |>
+    keep_abundant(factor_of_interest = strain) |>
+    scale_abundance()
+assayNames(se)
+```
+
+We make a PCA plot of the log scaled counts, to get a sense for
+how the samples vary. Note that minute 0 and 180 are similar, as the
+cells have not yet responded to the stimulus at minute 0. We will
+later remove these samples for simple modeling.
+
+```{r fission-pca}
+pca <- se |>
+    reduce_dimensions(method="PCA")
+library(ggplot2)
+pca |>
+    pivot_sample() |>
+    ggplot(aes(PC1, PC2, shape=strain, color=minute)) +
+    geom_point()
+```
+
+We can plot the gene with the most contribution to PC1. Here we will
+begin working with the data as a *tidySE* (shortened name for
+*tidySummarizedExperiment*):
+
+```{r max_pc1, message=FALSE}
+max_pc1 <- which.max(abs(attr(pca, "internals")[["PCA"]][["rotation"]][,"PC1"]))
+max_pc1
+library(tidySummarizedExperiment)
+se |>
+    filter(.feature == names(max_pc1)) |>
+    ggplot(aes(minute, counts_scaled + 1, color=strain, group=strain)) +
+    geom_point() +
+    stat_smooth(se=FALSE) +
+    scale_y_log10() +
+    ggtitle( rowData(se)[names(max_pc1),"symbol"] )
+```
+
+Now, let's consider a hypothetical analysis question: can we predict
+the `minute` (quantitatively) using the log gene expression of a genes
+in a neighborhood on the chromosome. While this is mostly a contrived
+question, for the purposes of demonstrating nesting of genomic
+datasets, you could imagine that there might be modules of responsive
+genes positioned along the chromosome, and that a prediction task is
+one way to identify genes that are related to an aspect of the
+experimental design.
+
+The steps will be:
+
+* Create centered log scaled counts
+* Create "blocks" of genes, by tiling the genome and labeling the
+  genes that fall within the same tile
+* "Nest" the tidySE such that we can operate on the blocks of genes
+  together
+* Run a series of models, each time predicting the `minute` variable
+  using the expression of the genes in the block
+* Evaluate these models (here simply looking at in-sample training
+  error)
+
+"Nesting" a dataset is an operation, similar to `group_by`, where a
+variable is used to perform grouped operations. We will specify to
+nest all the data (columns) besides the grouping variable, such that
+we end up with a *tibble* that looks like:
+
+| grouping variable | data     |
+|-------------------|----------|
+| value1            | RngdSmmE |
+| value2            | RngdSmmE |
+| ...               | ...      |
+
+Hence, for every row of the SummarizedExperiment that has `value1` for
+the grouping variable, we will have a subsetted SummarizedExperiment
+("ranged" refers to the face that it is `rowRanges`).
+
+Let's start with the first task.
+We compute `logcounts` and then center and scale these
+values. Likewise, we turn the `minute` variable from a factor into a
+numeric, and scale from 0 to 1. These changes would help us compare
+coefficients across gene later.
+
+```{r}
+se <- se |>
+  mutate(
+    logcounts = log2(counts_scaled + 1),
+    logcounts = (logcounts - mean(logcounts))/sd(logcounts)
+)
+se <- se |>
+    mutate(time = as.numeric(as.character(minute)) / 180)
+se
+```
+
+For demonstration, we will work with just the first chromosome: `I`.
+
+For our task of modeling the design using gene expression, in blocks
+along the genome, we need to create tiles to determine which genes
+to group together. To do so, we need to know how long the chromosomes
+are. The original
+[publication](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4050258/) 
+states:
+
+> Sequencing reads were aligned to the fission yeast genome (PomBase
+> database release 11)
+
+Usually we would look for the length of chromosomes from a source that
+hosts the reference (e.g. UCSC genome lengths can be obtained using
+`Seqinfo`). In this case, I wasn't able to find information about this
+particular release, so I just guess the length of the chromosome using
+the gene with the largest coordinate:
+
+```{r message=FALSE}
+library(plyranges)
+rowRanges(se) |>
+    filter(seqnames == "I") |>
+    summarize(max(end))
+genes_to_keep <- rowRanges(se) |>
+    filter(seqnames == "I") |>
+    names()
+```
+
+We now filter the `se` object to remove the 0 time point, and to
+keep just the features on chromosome I.
+
+```{r}
+se0 <- se # save the original object
+se <- se |>
+    filter(time != 0) |>
+    filter(.feature %in% genes_to_keep)
+```
+
+To make tiles on chromosome I, we just need to specify the extent
+(here I plug in the largest gene coordinate):
+
+```{r}
+tiles <- data.frame(seqnames="I",start=1,end=5.6e6) |>
+    as_granges() |>
+    tile_ranges(width=1e5) |>
+    select(-partition) %>%
+    mutate(tile = seq_along(.))
+tiles
+```
+
+We now determine which tile the genes fall in (using TSS only, so
+that genes fall in a single tile). We can add this data back onto the
+tidySE using a `left_join`:
+
+```{r}
+ranges_tiled <- rowRanges(se) |>
+    anchor_5p() |>
+    mutate(width=1) |>
+    join_overlap_left(tiles) %>%
+    mutate(.feature = names(.)) |>
+    select(tile, .feature, .drop_ranges=TRUE) |>
+    as_tibble()
+nrow(se) == nrow(ranges_tiled)
+# combining the tile information with the SE
+se <- se |> left_join(ranges_tiled)
+```
+
+Typically we have a little less than 50 genes per tile:
+
+```{r}
+summary(as.vector(table(rowData(se)$tile)))
+```
+
+Next, we want to create a *nested* table, where tidySE objects are
+grouped by tile and placed within a column of the table. There are a
+few choices on how to proceed. One option would be to `pivot_wider`
+the tidySE, as in this chunk below:
+
+```{r}
+se |>
+    filter(.feature %in% rownames(se)[1:5]) |>
+    select(.sample, strain, time, .feature, logcounts) |>
+    pivot_wider(names_from = .feature, values_from = logcounts)
+```
+
+This ends up being a bit slower than just extracting the information
+with `assay` and transposing it.
+
+First let's create our nested dataset:
+
+```{r message=FALSE}
+library(purrr)
+nested <- se |>
+    nest(data = -tile)
+nested
+```
+
+Now, by row, extract out and transpose log scaled counts:
+
+```{r}
+nested <- nested |>
+    mutate(trainx = map(data, ~ {
+        t(assay(.x, "logcounts"))
+    }))
+nested
+```
+
+We fit an elastic net model [@Friedman2010].
+
+```{r message=FALSE}
+library(glmnet)
+y <- colData(se)$time
+nested <- nested |>
+    mutate(fit = map(trainx, ~ {
+        glmnet(x = .x, y = y, alpha = .5, lambda = .1)
+    }))
+nested
+```
+
+We use the elastic net model, to predict the design from the gene
+expression (a variable number and set of genes per tile):
+
+```{r}
+nested <- nested |>
+    mutate(
+        pred = map2(trainx, fit, ~ {
+            predict(.y, newx = .x)[,1]
+        }),
+        n = map_dbl(data, nrow),
+        in_r2 = map_dbl(pred, ~ cor(.x, y)^2)
+    )
+nested
+```
+
+Finally we plot the prediction $R^2$, and compare to the number of
+genes in the models:
+
+```{r many-models-r2}
+library(ggplot2)
+ggplot(nested, aes(n, in_r2)) +
+    geom_point() +
+    ylab("in-sample r2")
+```
+
+Questions:
+
+* How else could we have performed the analysis, without doing the
+  nesting operation? Would this have been faster? What other variables
+  would need to be created to keep track of the many models?
+* What advantages or disadvantages can you think about for the
+  different ways of running multiple models across large genomic
+  datasets?

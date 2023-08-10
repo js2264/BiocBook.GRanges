@@ -21,17 +21,28 @@ Depends:
     BiocBook
 Imports:
     dplyr, 
+    stringr, 
     tidyr, 
     randomNames, 
     plyranges, 
+    tidybulk, 
+    tidySummarizedExperiment, 
     ensembldb, 
     TxDb.Hsapiens.UCSC.hg19.knownGene, 
     org.Hs.eg.db, 
+    org.Mm.eg.db, 
     AnnotationHub, 
+    DESeq2, 
     bootstrap,
     nullranges, 
     ggplot2, 
     ggridges, 
+    ggrepel, 
+    fission, 
+    plotgardener, 
+    oct4, 
+    macrophage, 
+    tximeta, 
     tibble
 Suggests:
     glue,
@@ -49,3 +60,4 @@ biocViews:
     ReportWriting, 
     Software
 License: MIT + file LICENSE
+LazyData: true

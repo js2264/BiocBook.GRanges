@@ -3,7 +3,7 @@
 ::: {.callout-note icon='true'}
 ## Objectives
 
-- determine the position of a set of SNPs in peaks, that is, determine the relative positions of those SNPs that overlap the peaks
+- Determine the position of a set of SNPs in peaks, that is, determine the relative positions of those SNPs that overlap the peaks
 
 :::
 
