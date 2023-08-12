@@ -374,7 +374,7 @@ Alasoo, Kaur, Julia Rodrigues, Subhankar Mukhopadhyay, Andrew J. Knights, Alice 
 <p>The default approach to assign ranges during summarization (<code>rowRanges</code> will represent the total extent of all isoforms of the gene):</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gse_default</span> <span class="op">&lt;-</span> <span class="fu">summarizeToGene</span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span>
-<span><span class="co">##  loading existing TxDb created: 2023-08-10 12:32:57</span></span>
+<span><span class="co">##  loading existing TxDb created: 2023-08-12 17:14:11</span></span>
 <span><span class="co">##  obtaining transcript-to-gene mapping from database</span></span>
 <span><span class="co">##  generating gene ranges</span></span>
 <span><span class="co">##  gene ranges assigned by total range of isoforms, see `assignRanges`</span></span>
@@ -385,9 +385,9 @@ Alasoo, Kaur, Julia Rodrigues, Subhankar Mukhopadhyay, Andrew J. Knights, Alice 
 <p>And an alternative method to assign ranges by isoform abundance (<code>rowRanges</code> will represent the extent of the most abundant isoform):</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu">summarizeToGene</span><span class="op">(</span><span class="va">se</span>, assignRanges<span class="op">=</span><span class="st">"abundant"</span><span class="op">)</span></span>
-<span><span class="co">##  loading existing TxDb created: 2023-08-10 12:32:57</span></span>
+<span><span class="co">##  loading existing TxDb created: 2023-08-12 17:14:11</span></span>
 <span><span class="co">##  obtaining transcript-to-gene mapping from database</span></span>
-<span><span class="co">##  loading existing gene ranges created: 2023-08-10 12:33:06</span></span>
+<span><span class="co">##  loading existing gene ranges created: 2023-08-12 17:14:19</span></span>
 <span><span class="co">##  gene ranges assigned by isoform abundance, see `assignRanges`</span></span>
 <span><span class="co">##  summarizing abundance</span></span>
 <span><span class="co">##  summarizing counts</span></span>
