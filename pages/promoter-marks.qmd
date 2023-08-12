@@ -14,7 +14,10 @@ data from the ENCODE project [@encode].
 
 ```{r message=FALSE}
 library(tidyr)
-file <- "../data-raw/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct.gz"
+file <- system.file(
+    "extdata", "GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct.gz", 
+    package = "BiocBook.GRanges"
+)
 gtex <- read.delim(file, skip=2)
 ```
 
