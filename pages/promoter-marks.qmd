@@ -14,11 +14,9 @@ data from the ENCODE project [@encode].
 
 ```{r message=FALSE}
 library(tidyr)
-file <- system.file(
-    "extdata", "GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct.gz", 
-    package = "BiocBook.GRanges"
-)
-gtex <- read.delim(file, skip=2)
+tmpfile <- tempfile()
+download.file("https://storage.googleapis.com/gtex_analysis_v8/rna_seq_data/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct.gz", tmpfile)
+gtex <- read.delim(tmpfile, skip=2)
 ```
 
 We select two tissues, bladder and kidney, and convert the data from a
