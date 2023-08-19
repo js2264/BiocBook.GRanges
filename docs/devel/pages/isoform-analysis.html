@@ -81,7 +81,7 @@ div.csl-indent {
 <meta name="quarto:offset" content="../">
 <link href="../pages/tximeta-gene-range.html" rel="next">
 <link href="../pages/many-genomic-models.html" rel="prev">
-<link href="../inst/assets/favicon.png" rel="icon" type="image/png">
+<link href="../assets/favicon.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -459,15 +459,19 @@ Vitting-Seerup, Kristoffer, and Albin Sandelin. 2019. <span>“<span>IsoformSwit
 <span><span class="op">)</span></span>
 <span><span class="va">ids</span></span>
 <span><span class="co">##  # A tibble: 67,595 × 4</span></span>
-<span><span class="co">##    tx_id gene_id    ntxp the_one</span></span>
-<span><span class="co">##    &lt;chr&gt; &lt;chr&gt;     &lt;int&gt;   &lt;int&gt;</span></span>
-<span><span class="co">##  1 1     100287102     3       1</span></span>
-<span><span class="co">##  2 1     100287102     3       1</span></span>
-<span><span class="co">##  3 1     100287102     3       1</span></span>
-<span><span class="co">##  4 2     100287102     3       0</span></span>
-<span><span class="co">##  5 2     100287102     3       0</span></span>
-<span><span class="co">##  6 2     100287102     3       0</span></span>
-<span><span class="co">##  # ℹ 67,589 more rows</span></span>
+<span><span class="co">##     tx_id gene_id    ntxp the_one</span></span>
+<span><span class="co">##     &lt;chr&gt; &lt;chr&gt;     &lt;int&gt;   &lt;int&gt;</span></span>
+<span><span class="co">##   1 1     100287102     3       1</span></span>
+<span><span class="co">##   2 1     100287102     3       1</span></span>
+<span><span class="co">##   3 1     100287102     3       1</span></span>
+<span><span class="co">##   4 2     100287102     3       0</span></span>
+<span><span class="co">##   5 2     100287102     3       0</span></span>
+<span><span class="co">##   6 2     100287102     3       0</span></span>
+<span><span class="co">##   7 3     100287102     3       0</span></span>
+<span><span class="co">##   8 3     100287102     3       0</span></span>
+<span><span class="co">##   9 3     100287102     3       0</span></span>
+<span><span class="co">##  10 11    729759        2       0</span></span>
+<span><span class="co">##  # ℹ 67,585 more rows</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="va">exons</span><span class="op">$</span><span class="va">tx_id</span>, <span class="va">ids</span><span class="op">$</span><span class="va">tx_id</span><span class="op">)</span></span>
 <span><span class="co">##  [1] TRUE</span></span>
 <span><span class="fu">mcols</span><span class="op">(</span><span class="va">exons</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/BiocGenerics/man/cbind.html">cbind</a></span><span class="op">(</span><span class="fu">mcols</span><span class="op">(</span><span class="va">exons</span><span class="op">)</span>, <span class="va">ids</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationDbi/man/AnnotationDb-class.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">tx_id</span><span class="op">)</span><span class="op">)</span></span>

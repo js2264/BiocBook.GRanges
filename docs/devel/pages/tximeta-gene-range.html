@@ -80,7 +80,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../pages/isoform-analysis.html" rel="prev">
-<link href="../inst/assets/favicon.png" rel="icon" type="image/png">
+<link href="../assets/favicon.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -328,32 +328,32 @@ Alasoo, Kaur, Julia Rodrigues, Subhankar Mukhopadhyay, Andrew J. Knights, Alice 
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bioconductor.org/packages/SummarizedExperiment">SummarizedExperiment</a></span><span class="op">)</span></span>
 <span><span class="fu">rowRanges</span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span>
 <span><span class="co">##  GRanges object with 205870 ranges and 3 metadata columns:</span></span>
-<span><span class="co">##                      seqnames      ranges strand |     tx_id</span></span>
-<span><span class="co">##                         &lt;Rle&gt;   &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;</span></span>
-<span><span class="co">##    ENST00000456328.2     chr1 11869-14409      + |         1</span></span>
-<span><span class="co">##    ENST00000450305.2     chr1 12010-13670      + |         2</span></span>
-<span><span class="co">##    ENST00000488147.1     chr1 14404-29570      - |      9483</span></span>
-<span><span class="co">##    ENST00000619216.1     chr1 17369-17436      - |      9484</span></span>
-<span><span class="co">##    ENST00000473358.1     chr1 29554-31097      + |         3</span></span>
-<span><span class="co">##                  ...      ...         ...    ... .       ...</span></span>
-<span><span class="co">##    ENST00000361681.2     chrM 14149-14673      - |    206692</span></span>
-<span><span class="co">##    ENST00000387459.1     chrM 14674-14742      - |    206693</span></span>
-<span><span class="co">##    ENST00000361789.2     chrM 14747-15887      + |    206684</span></span>
-<span><span class="co">##    ENST00000387460.2     chrM 15888-15953      + |    206685</span></span>
-<span><span class="co">##    ENST00000387461.2     chrM 15956-16023      - |    206694</span></span>
-<span><span class="co">##                                gene_id           tx_name</span></span>
-<span><span class="co">##                        &lt;CharacterList&gt;       &lt;character&gt;</span></span>
-<span><span class="co">##    ENST00000456328.2 ENSG00000223972.5 ENST00000456328.2</span></span>
-<span><span class="co">##    ENST00000450305.2 ENSG00000223972.5 ENST00000450305.2</span></span>
-<span><span class="co">##    ENST00000488147.1 ENSG00000227232.5 ENST00000488147.1</span></span>
-<span><span class="co">##    ENST00000619216.1 ENSG00000278267.1 ENST00000619216.1</span></span>
-<span><span class="co">##    ENST00000473358.1 ENSG00000243485.5 ENST00000473358.1</span></span>
-<span><span class="co">##                  ...               ...               ...</span></span>
-<span><span class="co">##    ENST00000361681.2 ENSG00000198695.2 ENST00000361681.2</span></span>
-<span><span class="co">##    ENST00000387459.1 ENSG00000210194.1 ENST00000387459.1</span></span>
-<span><span class="co">##    ENST00000361789.2 ENSG00000198727.2 ENST00000361789.2</span></span>
-<span><span class="co">##    ENST00000387460.2 ENSG00000210195.2 ENST00000387460.2</span></span>
-<span><span class="co">##    ENST00000387461.2 ENSG00000210196.2 ENST00000387461.2</span></span>
+<span><span class="co">##                      seqnames      ranges strand |     tx_id           gene_id</span></span>
+<span><span class="co">##                         &lt;Rle&gt;   &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;   &lt;CharacterList&gt;</span></span>
+<span><span class="co">##    ENST00000456328.2     chr1 11869-14409      + |         1 ENSG00000223972.5</span></span>
+<span><span class="co">##    ENST00000450305.2     chr1 12010-13670      + |         2 ENSG00000223972.5</span></span>
+<span><span class="co">##    ENST00000488147.1     chr1 14404-29570      - |      9483 ENSG00000227232.5</span></span>
+<span><span class="co">##    ENST00000619216.1     chr1 17369-17436      - |      9484 ENSG00000278267.1</span></span>
+<span><span class="co">##    ENST00000473358.1     chr1 29554-31097      + |         3 ENSG00000243485.5</span></span>
+<span><span class="co">##                  ...      ...         ...    ... .       ...               ...</span></span>
+<span><span class="co">##    ENST00000361681.2     chrM 14149-14673      - |    206692 ENSG00000198695.2</span></span>
+<span><span class="co">##    ENST00000387459.1     chrM 14674-14742      - |    206693 ENSG00000210194.1</span></span>
+<span><span class="co">##    ENST00000361789.2     chrM 14747-15887      + |    206684 ENSG00000198727.2</span></span>
+<span><span class="co">##    ENST00000387460.2     chrM 15888-15953      + |    206685 ENSG00000210195.2</span></span>
+<span><span class="co">##    ENST00000387461.2     chrM 15956-16023      - |    206694 ENSG00000210196.2</span></span>
+<span><span class="co">##                                tx_name</span></span>
+<span><span class="co">##                            &lt;character&gt;</span></span>
+<span><span class="co">##    ENST00000456328.2 ENST00000456328.2</span></span>
+<span><span class="co">##    ENST00000450305.2 ENST00000450305.2</span></span>
+<span><span class="co">##    ENST00000488147.1 ENST00000488147.1</span></span>
+<span><span class="co">##    ENST00000619216.1 ENST00000619216.1</span></span>
+<span><span class="co">##    ENST00000473358.1 ENST00000473358.1</span></span>
+<span><span class="co">##                  ...               ...</span></span>
+<span><span class="co">##    ENST00000361681.2 ENST00000361681.2</span></span>
+<span><span class="co">##    ENST00000387459.1 ENST00000387459.1</span></span>
+<span><span class="co">##    ENST00000361789.2 ENST00000361789.2</span></span>
+<span><span class="co">##    ENST00000387460.2 ENST00000387460.2</span></span>
+<span><span class="co">##    ENST00000387461.2 ENST00000387461.2</span></span>
 <span><span class="co">##    -------</span></span>
 <span><span class="co">##    seqinfo: 25 sequences (1 circular) from hg38 genome</span></span>
 <span><span class="fu">seqinfo</span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span>
@@ -374,7 +374,7 @@ Alasoo, Kaur, Julia Rodrigues, Subhankar Mukhopadhyay, Andrew J. Knights, Alice 
 <p>The default approach to assign ranges during summarization (<code>rowRanges</code> will represent the total extent of all isoforms of the gene):</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gse_default</span> <span class="op">&lt;-</span> <span class="fu">summarizeToGene</span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span>
-<span><span class="co">##  loading existing TxDb created: 2023-08-17 23:36:46</span></span>
+<span><span class="co">##  loading existing TxDb created: 2023-08-19 04:53:05</span></span>
 <span><span class="co">##  obtaining transcript-to-gene mapping from database</span></span>
 <span><span class="co">##  generating gene ranges</span></span>
 <span><span class="co">##  gene ranges assigned by total range of isoforms, see `assignRanges`</span></span>
@@ -385,9 +385,9 @@ Alasoo, Kaur, Julia Rodrigues, Subhankar Mukhopadhyay, Andrew J. Knights, Alice 
 <p>And an alternative method to assign ranges by isoform abundance (<code>rowRanges</code> will represent the extent of the most abundant isoform):</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu">summarizeToGene</span><span class="op">(</span><span class="va">se</span>, assignRanges<span class="op">=</span><span class="st">"abundant"</span><span class="op">)</span></span>
-<span><span class="co">##  loading existing TxDb created: 2023-08-17 23:36:46</span></span>
+<span><span class="co">##  loading existing TxDb created: 2023-08-19 04:53:05</span></span>
 <span><span class="co">##  obtaining transcript-to-gene mapping from database</span></span>
-<span><span class="co">##  loading existing gene ranges created: 2023-08-17 23:36:55</span></span>
+<span><span class="co">##  loading existing gene ranges created: 2023-08-19 04:53:15</span></span>
 <span><span class="co">##  gene ranges assigned by isoform abundance, see `assignRanges`</span></span>
 <span><span class="co">##  summarizing abundance</span></span>
 <span><span class="co">##  summarizing counts</span></span>

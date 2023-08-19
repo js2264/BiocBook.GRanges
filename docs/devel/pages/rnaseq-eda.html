@@ -81,7 +81,7 @@ div.csl-indent {
 <meta name="quarto:offset" content="../">
 <link href="../pages/many-genomic-models.html" rel="next">
 <link href="../pages/gene-plots.html" rel="prev">
-<link href="../inst/assets/favicon.png" rel="icon" type="image/png">
+<link href="../assets/favicon.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -311,8 +311,8 @@ King, Hamish W, and Robert J Klose. 2017. <span>“The Pioneer Factor OCT4 Requi
 <span><span class="co">##  Import genomic features from the file as a GRanges object ... OK</span></span>
 <span><span class="co">##  Prepare the 'metadata' data frame ... OK</span></span>
 <span><span class="co">##  Make the TxDb object ...</span></span>
-<span><span class="co">##  Warning in .get_cds_IDX(mcols0$type, mcols0$phase): The "phase" metadata column contains non-NA values for features of</span></span>
-<span><span class="co">##    type stop_codon. This information was ignored.</span></span>
+<span><span class="co">##  Warning in .get_cds_IDX(mcols0$type, mcols0$phase): The "phase" metadata column contains non-NA values for features of type</span></span>
+<span><span class="co">##    stop_codon. This information was ignored.</span></span>
 <span><span class="co">##  OK</span></span>
 <span><span class="co">##  generating transcript ranges</span></span>
 <span><span class="co">##  fetching genome info for GENCODE</span></span>
@@ -327,12 +327,11 @@ King, Hamish W, and Robert J Klose. 2017. <span>“The Pioneer Factor OCT4 Requi
 <span><span class="co">##  The following objects are masked from 'package:base':</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##      anyDuplicated, aperm, append, as.data.frame, basename, cbind,</span></span>
-<span><span class="co">##      colnames, dirname, do.call, duplicated, eval, evalq, Filter,</span></span>
-<span><span class="co">##      Find, get, grep, grepl, intersect, is.unsorted, lapply, Map,</span></span>
-<span><span class="co">##      mapply, match, mget, order, paste, pmax, pmax.int, pmin,</span></span>
-<span><span class="co">##      pmin.int, Position, rank, rbind, Reduce, rownames, sapply,</span></span>
-<span><span class="co">##      setdiff, sort, table, tapply, union, unique, unsplit, which.max,</span></span>
-<span><span class="co">##      which.min</span></span>
+<span><span class="co">##      colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,</span></span>
+<span><span class="co">##      get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply,</span></span>
+<span><span class="co">##      match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,</span></span>
+<span><span class="co">##      Position, rank, rbind, Reduce, rownames, sapply, setdiff, sort,</span></span>
+<span><span class="co">##      table, tapply, union, unique, unsplit, which.max, which.min</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##  Loading required package: S4Vectors</span></span>
 <span><span class="co">##  Loading required package: stats4</span></span>
@@ -347,7 +346,7 @@ King, Hamish W, and Robert J Klose. 2017. <span>“The Pioneer Factor OCT4 Requi
 <span><span class="co">##  </span></span>
 <span><span class="co">##      expand.grid, I, unname</span></span>
 <span><span class="va">gse</span> <span class="op">&lt;-</span> <span class="fu">summarizeToGene</span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span>
-<span><span class="co">##  loading existing TxDb created: 2023-08-17 23:33:04</span></span>
+<span><span class="co">##  loading existing TxDb created: 2023-08-19 04:48:49</span></span>
 <span><span class="co">##  Loading required package: GenomicFeatures</span></span>
 <span><span class="co">##  Loading required package: GenomicRanges</span></span>
 <span><span class="co">##  Loading required package: AnnotationDbi</span></span>
@@ -400,8 +399,8 @@ King, Hamish W, and Robert J Klose. 2017. <span>“The Pioneer Factor OCT4 Requi
 <span><span class="co">##      rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,</span></span>
 <span><span class="co">##      rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,</span></span>
 <span><span class="co">##      rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,</span></span>
-<span><span class="co">##      rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs,</span></span>
-<span><span class="co">##      rowVars, rowWeightedMads, rowWeightedMeans, rowWeightedMedians,</span></span>
+<span><span class="co">##      rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,</span></span>
+<span><span class="co">##      rowWeightedMads, rowWeightedMeans, rowWeightedMedians,</span></span>
 <span><span class="co">##      rowWeightedSds, rowWeightedVars</span></span>
 <span><span class="co">##  The following object is masked from 'package:Biobase':</span></span>
 <span><span class="co">##  </span></span>
@@ -456,16 +455,22 @@ King, Hamish W, and Robert J Klose. 2017. <span>“The Pioneer Factor OCT4 Requi
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">oct4</span></span>
 <span><span class="co">##  # A SummarizedExperiment-tibble abstraction: 322,182 × 18</span></span>
 <span><span class="co">##  # [90mFeatures=53697 | Samples=6 | Assays=counts, abundance, length[0m</span></span>
-<span><span class="co">##    .feature              .sample      counts abundance length names      line </span></span>
-<span><span class="co">##    &lt;chr&gt;                 &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;</span></span>
-<span><span class="co">##  1 ENSMUSG00000000001.4  OCT4-untrt-1   2920    16.6    2953. SRX2236945 OCT4 </span></span>
-<span><span class="co">##  2 ENSMUSG00000000003.15 OCT4-untrt-1      0     0       589. SRX2236945 OCT4 </span></span>
-<span><span class="co">##  3 ENSMUSG00000000028.15 OCT4-untrt-1   1906    19.0    1688. SRX2236945 OCT4 </span></span>
-<span><span class="co">##  4 ENSMUSG00000000031.16 OCT4-untrt-1   9044    74.8    2034. SRX2236945 OCT4 </span></span>
-<span><span class="co">##  5 ENSMUSG00000000037.16 OCT4-untrt-1    132     0.826  2688. SRX2236945 OCT4 </span></span>
-<span><span class="co">##  6 ENSMUSG00000000049.11 OCT4-untrt-1      0     0       943. SRX2236945 OCT4 </span></span>
-<span><span class="co">##  # ℹ 44 more rows</span></span>
-<span><span class="co">##  # ℹ 11 more variables: condition &lt;fct&gt;, rep &lt;int&gt;, sample_name &lt;fct&gt;, …</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">##     .feature          .sample counts abundance length names line  condition   rep</span></span>
+<span><span class="co">##     &lt;chr&gt;             &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;fct&gt;     &lt;int&gt;</span></span>
+<span><span class="co">##   1 ENSMUSG000000000… OCT4-u…   2920   16.6     2953. SRX2… OCT4  untrt         1</span></span>
+<span><span class="co">##   2 ENSMUSG000000000… OCT4-u…      0    0        589. SRX2… OCT4  untrt         1</span></span>
+<span><span class="co">##   3 ENSMUSG000000000… OCT4-u…   1906   19.0     1688. SRX2… OCT4  untrt         1</span></span>
+<span><span class="co">##   4 ENSMUSG000000000… OCT4-u…   9044   74.8     2034. SRX2… OCT4  untrt         1</span></span>
+<span><span class="co">##   5 ENSMUSG000000000… OCT4-u…    132    0.826   2688. SRX2… OCT4  untrt         1</span></span>
+<span><span class="co">##   6 ENSMUSG000000000… OCT4-u…      0    0        943. SRX2… OCT4  untrt         1</span></span>
+<span><span class="co">##   7 ENSMUSG000000000… OCT4-u…    444    1.84    4062. SRX2… OCT4  untrt         1</span></span>
+<span><span class="co">##   8 ENSMUSG000000000… OCT4-u…      8    0.0554  2430. SRX2… OCT4  untrt         1</span></span>
+<span><span class="co">##   9 ENSMUSG000000000… OCT4-u…   2503   16.3     2588. SRX2… OCT4  untrt         1</span></span>
+<span><span class="co">##  10 ENSMUSG000000000… OCT4-u…    610    7.58    1354. SRX2… OCT4  untrt         1</span></span>
+<span><span class="co">##  # ℹ 40 more rows</span></span>
+<span><span class="co">##  # ℹ 9 more variables: sample_name &lt;fct&gt;, gene_id &lt;chr&gt;, tx_ids &lt;named list&gt;,</span></span>
+<span><span class="co">##  #   SYMBOL &lt;chr&gt;, seqnames &lt;fct&gt;, start &lt;int&gt;, end &lt;int&gt;, width &lt;int&gt;,</span></span>
+<span><span class="co">##  #   strand &lt;fct&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><em>tidybulk</em> provides access to many steps in bulk analysis, including filtering and count scaling. For details on what is happening behind the scene, see the help, e.g.&nbsp;<code><a href="https://rdrr.io/pkg/tidybulk/man/keep_abundant-methods.html">?keep_abundant</a></code> describes that it makes use of <code><a href="https://rdrr.io/pkg/edgeR/man/filterByExpr.html">edgeR::filterByExpr</a></code>.</p>
 <div class="cell" data-layout-align="center">

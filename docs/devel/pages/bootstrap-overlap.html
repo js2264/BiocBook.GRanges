@@ -81,7 +81,7 @@ div.csl-indent {
 <meta name="quarto:offset" content="../">
 <link href="../pages/snp-position-in-peaks.html" rel="next">
 <link href="../pages/promoter-marks.html" rel="prev">
-<link href="../inst/assets/favicon.png" rel="icon" type="image/png">
+<link href="../assets/favicon.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -293,12 +293,11 @@ Dunham, I. et al. 2012. <span>“<span class="nocase">An integrated encyclopedia
 <span><span class="co">##  The following objects are masked from 'package:base':</span></span>
 <span><span class="co">##  </span></span>
 <span><span class="co">##      anyDuplicated, aperm, append, as.data.frame, basename, cbind,</span></span>
-<span><span class="co">##      colnames, dirname, do.call, duplicated, eval, evalq, Filter,</span></span>
-<span><span class="co">##      Find, get, grep, grepl, intersect, is.unsorted, lapply, Map,</span></span>
-<span><span class="co">##      mapply, match, mget, order, paste, pmax, pmax.int, pmin,</span></span>
-<span><span class="co">##      pmin.int, Position, rank, rbind, Reduce, rownames, sapply,</span></span>
-<span><span class="co">##      setdiff, sort, table, tapply, union, unique, unsplit, which.max,</span></span>
-<span><span class="co">##      which.min</span></span>
+<span><span class="co">##      colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,</span></span>
+<span><span class="co">##      get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply,</span></span>
+<span><span class="co">##      match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,</span></span>
+<span><span class="co">##      Position, rank, rbind, Reduce, rownames, sapply, setdiff, sort,</span></span>
+<span><span class="co">##      table, tapply, union, unique, unsplit, which.max, which.min</span></span>
 <span><span class="co">##  Loading required package: BiocFileCache</span></span>
 <span><span class="co">##  Loading required package: dbplyr</span></span>
 <span><span class="va">ah</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/AnnotationHub/man/AnnotationHub-class.html">AnnotationHub</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -580,15 +579,19 @@ Dunham, I. et al. 2012. <span>“<span class="nocase">An integrated encyclopedia
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>rate <span class="op">=</span> <span class="va">any_hits</span><span class="op">/</span><span class="va">total</span><span class="op">)</span></span>
 <span><span class="co">##  Joining with `by = join_by(iter)`</span></span>
 <span><span class="co">##  # A tibble: 30 × 4</span></span>
-<span><span class="co">##    iter  any_hits total    rate</span></span>
-<span><span class="co">##    &lt;fct&gt;    &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;</span></span>
-<span><span class="co">##  1 1           59  6031 0.00978</span></span>
-<span><span class="co">##  2 2           58  5710 0.0102 </span></span>
-<span><span class="co">##  3 3           73  5758 0.0127 </span></span>
-<span><span class="co">##  4 4           50  5927 0.00844</span></span>
-<span><span class="co">##  5 5           37  5713 0.00648</span></span>
-<span><span class="co">##  6 6           59  5888 0.0100 </span></span>
-<span><span class="co">##  # ℹ 24 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">##     iter  any_hits total    rate</span></span>
+<span><span class="co">##     &lt;fct&gt;    &lt;int&gt; &lt;int&gt;   &lt;dbl&gt;</span></span>
+<span><span class="co">##   1 1           59  6031 0.00978</span></span>
+<span><span class="co">##   2 2           58  5710 0.0102 </span></span>
+<span><span class="co">##   3 3           73  5758 0.0127 </span></span>
+<span><span class="co">##   4 4           50  5927 0.00844</span></span>
+<span><span class="co">##   5 5           37  5713 0.00648</span></span>
+<span><span class="co">##   6 6           59  5888 0.0100 </span></span>
+<span><span class="co">##   7 7           58  5910 0.00981</span></span>
+<span><span class="co">##   8 8           79  5836 0.0135 </span></span>
+<span><span class="co">##   9 9           59  5770 0.0102 </span></span>
+<span><span class="co">##  10 10          50  5991 0.00835</span></span>
+<span><span class="co">##  # ℹ 20 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

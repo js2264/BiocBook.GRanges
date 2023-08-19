@@ -81,7 +81,7 @@ div.csl-indent {
 <meta name="quarto:offset" content="../">
 <link href="../pages/isoform-analysis.html" rel="next">
 <link href="../pages/rnaseq-eda.html" rel="prev">
-<link href="../inst/assets/favicon.png" rel="icon" type="image/png">
+<link href="../assets/favicon.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -403,16 +403,22 @@ Leong, Hui Sun, Keren Dawson, Chris Wirth, Yaoyong Li, Yvonne Connolly, Duncan L
 <span><span class="va">se</span></span>
 <span><span class="co">##  # A SummarizedExperiment-tibble abstraction: 210,996 × 20</span></span>
 <span><span class="co">##  # [90mFeatures=5861 | Samples=36 | Assays=counts, counts_scaled, logcounts[0m</span></span>
-<span><span class="co">##    .feature    .sample    counts counts_scaled logcounts strain minute</span></span>
-<span><span class="co">##    &lt;chr&gt;       &lt;chr&gt;       &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt; </span></span>
-<span><span class="co">##  1 SPAC212.09c GSM1368273     23          23.1    -1.70  wt     0     </span></span>
-<span><span class="co">##  2 SPAC212.04c GSM1368273     37          37.1    -1.42  wt     0     </span></span>
-<span><span class="co">##  3 SPAC977.11  GSM1368273    155         155.     -0.581 wt     0     </span></span>
-<span><span class="co">##  4 SPAC977.13c GSM1368273     19          19.0    -1.81  wt     0     </span></span>
-<span><span class="co">##  5 SPAC977.15  GSM1368273     91          91.2    -0.896 wt     0     </span></span>
-<span><span class="co">##  6 SPAC977.16c GSM1368273    184         184.     -0.479 wt     0     </span></span>
-<span><span class="co">##  # ℹ 44 more rows</span></span>
-<span><span class="co">##  # ℹ 13 more variables: replicate &lt;fct&gt;, id &lt;chr&gt;, TMM &lt;dbl&gt;, …</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">##     .feature .sample counts counts_scaled logcounts strain minute replicate id   </span></span>
+<span><span class="co">##     &lt;chr&gt;    &lt;chr&gt;    &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;  &lt;fct&gt;     &lt;chr&gt;</span></span>
+<span><span class="co">##   1 SPAC212… GSM136…     23          23.1    -1.70  wt     0      r1        wt_0…</span></span>
+<span><span class="co">##   2 SPAC212… GSM136…     37          37.1    -1.42  wt     0      r1        wt_0…</span></span>
+<span><span class="co">##   3 SPAC977… GSM136…    155         155.     -0.581 wt     0      r1        wt_0…</span></span>
+<span><span class="co">##   4 SPAC977… GSM136…     19          19.0    -1.81  wt     0      r1        wt_0…</span></span>
+<span><span class="co">##   5 SPAC977… GSM136…     91          91.2    -0.896 wt     0      r1        wt_0…</span></span>
+<span><span class="co">##   6 SPAC977… GSM136…    184         184.     -0.479 wt     0      r1        wt_0…</span></span>
+<span><span class="co">##   7 SPNCRNA… GSM136…     49          49.1    -1.26  wt     0      r1        wt_0…</span></span>
+<span><span class="co">##   8 SPAC1F8… GSM136…    105         105.     -0.812 wt     0      r1        wt_0…</span></span>
+<span><span class="co">##   9 SPAC1F8… GSM136…    151         151.     -0.597 wt     0      r1        wt_0…</span></span>
+<span><span class="co">##  10 SPAC11D… GSM136…     22          22.1    -1.72  wt     0      r1        wt_0…</span></span>
+<span><span class="co">##  # ℹ 40 more rows</span></span>
+<span><span class="co">##  # ℹ 11 more variables: TMM &lt;dbl&gt;, multiplier &lt;dbl&gt;, time &lt;dbl&gt;, symbol &lt;chr&gt;,</span></span>
+<span><span class="co">##  #   biotype &lt;fct&gt;, .abundant &lt;lgl&gt;, seqnames &lt;fct&gt;, start &lt;int&gt;, end &lt;int&gt;,</span></span>
+<span><span class="co">##  #   width &lt;int&gt;, strand &lt;fct&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>For demonstration, we will work with just the first chromosome: <code>I</code>.</p>
 <p>For our task of modeling the design using gene expression, in blocks along the genome, we need to create tiles to determine which genes to group together. To do so, we need to know how long the chromosomes are. The original <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4050258/">publication</a> states:</p>
@@ -495,15 +501,19 @@ Leong, Hui Sun, Keren Dawson, Chris Wirth, Yaoyong Li, Yvonne Connolly, Duncan L
 <span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">.feature</span>, values_from <span class="op">=</span> <span class="va">logcounts</span><span class="op">)</span></span>
 <span><span class="co">##  tidySummarizedExperiment says: A data frame is returned for independent data analysis.</span></span>
 <span><span class="co">##  # A tibble: 30 × 8</span></span>
-<span><span class="co">##    .sample    strain   time SPAC212.09c SPAC212.04c SPAC977.11 SPAC977.13c</span></span>
-<span><span class="co">##    &lt;chr&gt;      &lt;fct&gt;   &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></span>
-<span><span class="co">##  1 GSM1368276 wt     0.0833      -1.30       -1.51      -0.705      -1.85 </span></span>
-<span><span class="co">##  2 GSM1368277 wt     0.0833      -1.03       -2.01      -1.19       -1.27 </span></span>
-<span><span class="co">##  3 GSM1368278 wt     0.0833      -0.993      -2.11      -1.13       -1.88 </span></span>
-<span><span class="co">##  4 GSM1368279 wt     0.167       -0.802      -1.40      -0.690      -0.324</span></span>
-<span><span class="co">##  5 GSM1368280 wt     0.167       -0.574      -1.06      -0.847      -0.399</span></span>
-<span><span class="co">##  6 GSM1368281 wt     0.167       -0.685      -0.880     -0.685      -0.571</span></span>
-<span><span class="co">##  # ℹ 24 more rows</span></span>
+<span><span class="co">##     .sample    strain   time SPAC212.09c SPAC212.04c SPAC977.11 SPAC977.13c</span></span>
+<span><span class="co">##     &lt;chr&gt;      &lt;fct&gt;   &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;</span></span>
+<span><span class="co">##   1 GSM1368276 wt     0.0833      -1.30       -1.51      -0.705      -1.85 </span></span>
+<span><span class="co">##   2 GSM1368277 wt     0.0833      -1.03       -2.01      -1.19       -1.27 </span></span>
+<span><span class="co">##   3 GSM1368278 wt     0.0833      -0.993      -2.11      -1.13       -1.88 </span></span>
+<span><span class="co">##   4 GSM1368279 wt     0.167       -0.802      -1.40      -0.690      -0.324</span></span>
+<span><span class="co">##   5 GSM1368280 wt     0.167       -0.574      -1.06      -0.847      -0.399</span></span>
+<span><span class="co">##   6 GSM1368281 wt     0.167       -0.685      -0.880     -0.685      -0.571</span></span>
+<span><span class="co">##   7 GSM1368282 wt     0.333       -0.744      -1.56      -1.10       -1.45 </span></span>
+<span><span class="co">##   8 GSM1368283 wt     0.333       -0.959      -1.58      -0.910      -0.828</span></span>
+<span><span class="co">##   9 GSM1368284 wt     0.333       -0.832      -1.51      -0.874      -1.07 </span></span>
+<span><span class="co">##  10 GSM1368285 wt     0.667       -1.03       -1.49      -0.866      -1.74 </span></span>
+<span><span class="co">##  # ℹ 20 more rows</span></span>
 <span><span class="co">##  # ℹ 1 more variable: SPAC977.15 &lt;dbl&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This ends up being a bit slower than just extracting the information with <code>assay</code> and transposing it.</p>
@@ -514,15 +524,19 @@ Leong, Hui Sun, Keren Dawson, Chris Wirth, Yaoyong Li, Yvonne Connolly, Duncan L
 <span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">nest</a></span><span class="op">(</span>data <span class="op">=</span> <span class="op">-</span><span class="va">tile</span><span class="op">)</span></span>
 <span><span class="va">nested</span></span>
 <span><span class="co">##  # A tibble: 56 × 2</span></span>
-<span><span class="co">##     tile data           </span></span>
-<span><span class="co">##    &lt;int&gt; &lt;list&gt;         </span></span>
-<span><span class="co">##  1     1 &lt;RngdSmmE[,30]&gt;</span></span>
-<span><span class="co">##  2     2 &lt;RngdSmmE[,30]&gt;</span></span>
-<span><span class="co">##  3     3 &lt;RngdSmmE[,30]&gt;</span></span>
-<span><span class="co">##  4     4 &lt;RngdSmmE[,30]&gt;</span></span>
-<span><span class="co">##  5     5 &lt;RngdSmmE[,30]&gt;</span></span>
-<span><span class="co">##  6     6 &lt;RngdSmmE[,30]&gt;</span></span>
-<span><span class="co">##  # ℹ 50 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">##      tile data           </span></span>
+<span><span class="co">##     &lt;int&gt; &lt;list&gt;         </span></span>
+<span><span class="co">##   1     1 &lt;RngdSmmE[,30]&gt;</span></span>
+<span><span class="co">##   2     2 &lt;RngdSmmE[,30]&gt;</span></span>
+<span><span class="co">##   3     3 &lt;RngdSmmE[,30]&gt;</span></span>
+<span><span class="co">##   4     4 &lt;RngdSmmE[,30]&gt;</span></span>
+<span><span class="co">##   5     5 &lt;RngdSmmE[,30]&gt;</span></span>
+<span><span class="co">##   6     6 &lt;RngdSmmE[,30]&gt;</span></span>
+<span><span class="co">##   7     7 &lt;RngdSmmE[,30]&gt;</span></span>
+<span><span class="co">##   8     8 &lt;RngdSmmE[,30]&gt;</span></span>
+<span><span class="co">##   9     9 &lt;RngdSmmE[,30]&gt;</span></span>
+<span><span class="co">##  10    10 &lt;RngdSmmE[,30]&gt;</span></span>
+<span><span class="co">##  # ℹ 46 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, by row, extract out and transpose log scaled counts:</p>
 <div class="cell" data-layout-align="center">
@@ -532,15 +546,19 @@ Leong, Hui Sun, Keren Dawson, Chris Wirth, Yaoyong Li, Yvonne Connolly, Duncan L
 <span>    <span class="op">}</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">nested</span></span>
 <span><span class="co">##  # A tibble: 56 × 3</span></span>
-<span><span class="co">##     tile data            trainx         </span></span>
-<span><span class="co">##    &lt;int&gt; &lt;list&gt;          &lt;list&gt;         </span></span>
-<span><span class="co">##  1     1 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 20]&gt;</span></span>
-<span><span class="co">##  2     2 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 54]&gt;</span></span>
-<span><span class="co">##  3     3 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 41]&gt;</span></span>
-<span><span class="co">##  4     4 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 54]&gt;</span></span>
-<span><span class="co">##  5     5 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 44]&gt;</span></span>
-<span><span class="co">##  6     6 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 53]&gt;</span></span>
-<span><span class="co">##  # ℹ 50 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">##      tile data            trainx         </span></span>
+<span><span class="co">##     &lt;int&gt; &lt;list&gt;          &lt;list&gt;         </span></span>
+<span><span class="co">##   1     1 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 20]&gt;</span></span>
+<span><span class="co">##   2     2 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 54]&gt;</span></span>
+<span><span class="co">##   3     3 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 41]&gt;</span></span>
+<span><span class="co">##   4     4 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 54]&gt;</span></span>
+<span><span class="co">##   5     5 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 44]&gt;</span></span>
+<span><span class="co">##   6     6 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 53]&gt;</span></span>
+<span><span class="co">##   7     7 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 45]&gt;</span></span>
+<span><span class="co">##   8     8 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 47]&gt;</span></span>
+<span><span class="co">##   9     9 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 41]&gt;</span></span>
+<span><span class="co">##  10    10 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 59]&gt;</span></span>
+<span><span class="co">##  # ℹ 46 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We fit an elastic net model <span class="citation" data-cites="Friedman2010">(<a href="#ref-Friedman2010" role="doc-biblioref">Friedman, Hastie, and Tibshirani 2010</a>)</span>.</p>
 <div class="no-row-height column-margin column-container"><div id="ref-Friedman2010" class="csl-entry" role="listitem">
@@ -554,15 +572,19 @@ Friedman, Jerome H., Trevor Hastie, and Rob Tibshirani. 2010. <span>“Regulariz
 <span>    <span class="op">}</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">nested</span></span>
 <span><span class="co">##  # A tibble: 56 × 4</span></span>
-<span><span class="co">##     tile data            trainx          fit    </span></span>
-<span><span class="co">##    &lt;int&gt; &lt;list&gt;          &lt;list&gt;          &lt;list&gt; </span></span>
-<span><span class="co">##  1     1 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 20]&gt; &lt;elnet&gt;</span></span>
-<span><span class="co">##  2     2 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 54]&gt; &lt;elnet&gt;</span></span>
-<span><span class="co">##  3     3 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 41]&gt; &lt;elnet&gt;</span></span>
-<span><span class="co">##  4     4 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 54]&gt; &lt;elnet&gt;</span></span>
-<span><span class="co">##  5     5 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 44]&gt; &lt;elnet&gt;</span></span>
-<span><span class="co">##  6     6 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 53]&gt; &lt;elnet&gt;</span></span>
-<span><span class="co">##  # ℹ 50 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">##      tile data            trainx          fit    </span></span>
+<span><span class="co">##     &lt;int&gt; &lt;list&gt;          &lt;list&gt;          &lt;list&gt; </span></span>
+<span><span class="co">##   1     1 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 20]&gt; &lt;elnet&gt;</span></span>
+<span><span class="co">##   2     2 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 54]&gt; &lt;elnet&gt;</span></span>
+<span><span class="co">##   3     3 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 41]&gt; &lt;elnet&gt;</span></span>
+<span><span class="co">##   4     4 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 54]&gt; &lt;elnet&gt;</span></span>
+<span><span class="co">##   5     5 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 44]&gt; &lt;elnet&gt;</span></span>
+<span><span class="co">##   6     6 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 53]&gt; &lt;elnet&gt;</span></span>
+<span><span class="co">##   7     7 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 45]&gt; &lt;elnet&gt;</span></span>
+<span><span class="co">##   8     8 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 47]&gt; &lt;elnet&gt;</span></span>
+<span><span class="co">##   9     9 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 41]&gt; &lt;elnet&gt;</span></span>
+<span><span class="co">##  10    10 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 59]&gt; &lt;elnet&gt;</span></span>
+<span><span class="co">##  # ℹ 46 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We use the elastic net model, to predict the design from the gene expression (a variable number and set of genes per tile):</p>
 <div class="cell" data-layout-align="center">
@@ -576,15 +598,19 @@ Friedman, Jerome H., Trevor Hastie, and Rob Tibshirani. 2010. <span>“Regulariz
 <span>    <span class="op">)</span></span>
 <span><span class="va">nested</span></span>
 <span><span class="co">##  # A tibble: 56 × 7</span></span>
-<span><span class="co">##     tile data            trainx          fit     pred           n in_r2</span></span>
-<span><span class="co">##    &lt;int&gt; &lt;list&gt;          &lt;list&gt;          &lt;list&gt;  &lt;list&gt;     &lt;dbl&gt; &lt;dbl&gt;</span></span>
-<span><span class="co">##  1     1 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 20]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    20 0.851</span></span>
-<span><span class="co">##  2     2 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 54]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    54 0.908</span></span>
-<span><span class="co">##  3     3 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 41]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    41 0.906</span></span>
-<span><span class="co">##  4     4 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 54]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    54 0.880</span></span>
-<span><span class="co">##  5     5 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 44]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    44 0.912</span></span>
-<span><span class="co">##  6     6 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 53]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    53 0.892</span></span>
-<span><span class="co">##  # ℹ 50 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="co">##      tile data            trainx          fit     pred           n in_r2</span></span>
+<span><span class="co">##     &lt;int&gt; &lt;list&gt;          &lt;list&gt;          &lt;list&gt;  &lt;list&gt;     &lt;dbl&gt; &lt;dbl&gt;</span></span>
+<span><span class="co">##   1     1 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 20]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    20 0.851</span></span>
+<span><span class="co">##   2     2 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 54]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    54 0.908</span></span>
+<span><span class="co">##   3     3 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 41]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    41 0.906</span></span>
+<span><span class="co">##   4     4 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 54]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    54 0.880</span></span>
+<span><span class="co">##   5     5 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 44]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    44 0.912</span></span>
+<span><span class="co">##   6     6 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 53]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    53 0.892</span></span>
+<span><span class="co">##   7     7 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 45]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    45 0.894</span></span>
+<span><span class="co">##   8     8 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 47]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    47 0.856</span></span>
+<span><span class="co">##   9     9 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 41]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    41 0.890</span></span>
+<span><span class="co">##  10    10 &lt;RngdSmmE[,30]&gt; &lt;dbl [30 × 59]&gt; &lt;elnet&gt; &lt;dbl [30]&gt;    59 0.894</span></span>
+<span><span class="co">##  # ℹ 46 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Finally we plot the prediction <span class="math inline">\(R^2\)</span>, and compare to the number of genes in the models:</p>
 <div class="cell" data-layout-align="center">
