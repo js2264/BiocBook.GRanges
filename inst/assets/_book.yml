@@ -12,8 +12,8 @@ book:
     - pages/many-genomic-models.qmd
     - pages/isoform-analysis.qmd
     - pages/tximeta-gene-range.qmd
-  cover-image: inst/assets/cover.png
-  favicon: inst/assets/favicon.png
+  cover-image: assets/cover.png
+  favicon: assets/favicon.png
   sidebar: 
     tools:
       - icon: git
